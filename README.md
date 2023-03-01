@@ -2,11 +2,13 @@ Enunciado:
 
 Ecommerce
 
-✅ Muestra una lista de productos que vienen de un JSON
-✅ Añade un filtro por precio
-✅ Añade un filtro por categoría
+✅ Muestra una lista de productos que vienen de un JSON.
 
-- Haz uso de useContext para evitar pasar props innecesarias.
+✅ Añade un filtro por precio.
+
+✅ Añade un filtro por categoría.
+
+✅ Haz uso de useContext para evitar pasar props innecesarias.
 
 Carrito:
 
