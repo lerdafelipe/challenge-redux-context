@@ -3,7 +3,7 @@ import { CartContext } from '../../context/cart'
 import './Cart.css'
 
 const Cart = () => {
-  const { cart } = useContext(CartContext)
+  const { cart, total, removeProduct } = useContext(CartContext)
 
   return (
     <div className='modalCart'>
@@ -15,6 +15,7 @@ const Cart = () => {
               <th>Producto</th>
               <th>Unid.</th>
               <th>Subtotal</th>
+              <th> </th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +26,7 @@ const Cart = () => {
                   <td>{product.title}</td>
                   <td>{product.quantity}</td>
                   <td>${product.price * product.quantity}</td>
+                  <td><button className='delete' onClick={() => removeProduct(product.id)}>X</button></td>
                 </tr>
               )
             })}
@@ -32,7 +34,8 @@ const Cart = () => {
             <tr>
               <td> </td>
               <td>Total:</td>
-              <td>$2697</td>
+              <td>${total}</td>
+              <td> </td>
             </tr>
           </tbody>
         </table>

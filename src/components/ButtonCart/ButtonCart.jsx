@@ -5,12 +5,12 @@ import './ButtonCart.css'
 
 const ButtonCart = () => {
   const [showCart, setShowCart] = useState(false)
-  const { cart } = useContext(CartContext)
+  const { quantity } = useContext(CartContext)
 
   return (
     <div className='cartContainer'>
       <div className='buttonCartContainer'>
-        <button onClick={() => setShowCart(!showCart)}>[{cart.length}] Show Cart</button>
+        <button onClick={() => setShowCart(!showCart)}>[{quantity}] Show Cart</button>
       </div>
       {showCart ? <Cart /> : ''}
     </div>
