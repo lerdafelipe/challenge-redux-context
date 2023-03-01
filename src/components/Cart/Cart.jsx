@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../../context/cart'
+import ItemCart from '../ItemCart/ItemCart'
 import './Cart.css'
 
 const Cart = () => {
-  const { cart, total, removeProduct } = useContext(CartContext)
+  const { cart, total } = useContext(CartContext)
 
   return (
     <div className='modalCart'>
@@ -20,16 +21,7 @@ const Cart = () => {
           </thead>
           <tbody>
 
-            {cart.map(product => {
-              return (
-                <tr key={product.id}>
-                  <td>{product.title}</td>
-                  <td>{product.quantity}</td>
-                  <td>${product.price * product.quantity}</td>
-                  <td><button className='delete' onClick={() => removeProduct(product.id)}>X</button></td>
-                </tr>
-              )
-            })}
+            {cart.map(product => <ItemCart key={product.id} product={product} />)}
 
             <tr>
               <td> </td>
