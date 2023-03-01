@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/cart'
 import './ProductCard.css'
 
 const ProductsCard = ({ product }) => {
+  const { addProduct } = useContext(CartContext)
+
+  const handleClick = () => {
+    addProduct(product)
+  }
+
   return (
     <article>
       <img src={product.thumbnail} alt={product.title} />
@@ -9,7 +16,7 @@ const ProductsCard = ({ product }) => {
         <h3>{product.title} - <span>$ {product.price}</span></h3>
       </div>
       <div>
-        <button>Add to cart</button>
+        <button onClick={handleClick}>Add to cart</button>
       </div>
     </article>
   )

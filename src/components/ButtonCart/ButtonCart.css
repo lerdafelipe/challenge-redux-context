@@ -1,0 +1,12 @@
+.buttonCartContainer{
+    position: fixed;
+    z-index: 6;
+    bottom: 25px;
+    width: 100%;
+}
+.buttonCartContainer button{
+    width: 280px;
+    box-shadow: 0 1px 3px 2px rgba(198, 210, 200, 0.186);
+    background-color: #656ac8;
+    color: black;
+}
