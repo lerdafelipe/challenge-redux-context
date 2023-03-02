@@ -1,47 +1,44 @@
-import { createContext, useState } from 'react'
+import { createContext, useReducer } from 'react'
+import { cartInitialState, cartReducer } from '../reducers/cart'
 
 export const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
+  const [state, dispatch] = useReducer(cartReducer, cartInitialState)
 
   const addProduct = (product) => {
-    const idProduct = cart.findIndex(item => item.id === product.id)
-
-    if (idProduct >= 0) {
-      const newCart = structuredClone(cart)
-      newCart[idProduct].quantity += 1
-      return setCart(newCart)
-    }
-
-    const newProduct = { ...product, quantity: 1 }
-    setCart(prev => [...prev, newProduct])
+    dispatch({
+      type: 'ADD_CART',
+      payload: product
+    })
   }
 
-  const total = cart.reduce((totalPrice, item) => { return (item.price * item.quantity) + totalPrice }, 0)
+  const total = state.reduce((totalPrice, item) => { return (item.price * item.quantity) + totalPrice }, 0)
 
-  const quantity = cart.reduce((totalProducts, item) => { return item.quantity + totalProducts }, 0)
+  const quantity = state.reduce((totalProducts, item) => { return item.quantity + totalProducts }, 0)
 
   const removeProduct = (id) => {
-    const newCart = cart.filter(item => item.id !== id)
-    setCart(newCart)
+    dispatch({
+      type: 'REMOVE_ITEM',
+      payload: id
+    })
   }
 
   const incrementQuantityProduct = (product) => {
-    const indexProduct = cart.findIndex(item => item.id === product.id)
-    const newCart = structuredClone(cart)
-    newCart[indexProduct].quantity += 1
-    setCart(newCart)
+    dispatch({
+      type: 'INCREMENT',
+      payload: product
+    })
   }
 
   const decrementQuantityProduct = (product) => {
-    const indexProduct = cart.findIndex(item => item.id === product.id)
-    const newCart = structuredClone(cart)
-    newCart[indexProduct].quantity -= 1
-    setCart(newCart)
+    dispatch({
+      type: 'DECREMENT',
+      payload: product
+    })
   }
 
   return (
-    <CartContext.Provider value={{ cart, addProduct, quantity, total, removeProduct, incrementQuantityProduct, decrementQuantityProduct }}>{children}</CartContext.Provider>
+    <CartContext.Provider value={{ cart: state, addProduct, quantity, total, removeProduct, incrementQuantityProduct, decrementQuantityProduct }}>{children}</CartContext.Provider>
   )
 }
